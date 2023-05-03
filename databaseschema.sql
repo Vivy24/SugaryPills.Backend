@@ -15,44 +15,29 @@ CREATE TABLE identifications (
 CREATE TABLE symptomResults (
     ID SERIAL PRIMARY KEY, 
     identificationID int NOT NULL,
-    fatigue BOOLEAN NOT NULL,
-    blurredVision BOOLEAN NOT NULL,
-    tingling BOOLEAN NOT NULL,
-    weightChange BOOLEAN NOT NULL,
+    urination BOOLEAN NOT NULL,
     thirst BOOLEAN NOT NULL,
-    infections BOOLEAN NOT NULL,
-    cuts BOOLEAN NOT NULL,
-    erection BOOLEAN NOT NULL,
+    hunger BOOLEAN NOT NULL,
+    fatigue BOOLEAN NOT NULL,
+    blurred BOOLEAN NOT NULL,
+    slowhealing BOOLEAN NOT NULL,
+    tingling BOOLEAN NOT NULL,
+    dry BOOLEAN NOT NULL,
+    weightChange BOOLEAN NOT NULL,
+    moodChange BOOLEAN NOT NULL,
     FOREIGN KEY (identificationID) REFERENCES identifications(id)
 );
 
 CREATE TABLE lifestyleResult (
     ID SERIAL PRIMARY KEY,
     identificationID int NOT NULL,
-    smoke VARCHAR(20),
-    stressed VARCHAR(20) NOT NULL,
-    mentalIllness VARCHAR (100) NOT NULL,
-    cupsOfWater VARCHAR(20) NOT NULL,
+    question1 VARCHAR(320),
+    question2 VARCHAR(320) NOT NULL,
+    question3 VARCHAR (320) NOT NULL,
+    question4 VARCHAR(320) NOT NULL,
+    question5 VARCHAR(320) NOT NULL,
     FOREIGN KEY (identificationID) REFERENCES identifications(id)
 );
-
-
-CREATE TABLE exercise (
-    ID SERIAL PRIMARY KEY, 
-    lifeStyleID INT NOT NULL,
-    name VARCHAR(100) NOT NULL, 
-    level VARCHAR(20) NOT NULL,
-    FOREIGN KEY (lifeStyleID) REFERENCES lifestyleResult(id)
-);
-
-CREATE TABLE food (
-    ID SERIAL PRIMARY KEY, 
-    lifeStyleID INT NOT NULL,
-    name VARCHAR(100) NOT NULL, 
-    level VARCHAR(20) NOT NULL,
-    FOREIGN KEY (lifeStyleID) REFERENCES lifestyleResult(id)
-);
-
 
 
 CREATE TABLE reportEntries (

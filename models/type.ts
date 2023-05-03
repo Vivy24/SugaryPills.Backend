@@ -12,33 +12,24 @@ export interface identification {
 }
 
 export interface symptomResult {
+    urination: boolean;
+    thrist: boolean;
+    hunger: boolean;
     fatigue: boolean;
-    blurredVision: boolean;
+    blurred: boolean;
+    slowhealing: boolean;
     tingling: boolean;
+    dry: boolean;
     weightChange: boolean;
-    thirst: boolean;
-    infections: boolean;
-    cuts: boolean;
-    erection: boolean;
-}
-
-export interface exercise {
-    name: string;
-    level: string;
-}
-
-export interface food {
-    name: string;
-    level: string;
+    moodChange: boolean;
 }
 
 export interface lifeStyleResult {
-    smoke: string;
-    stressed: string;
-    mentalIllness: Array<string>;
-    cupsOfWater: string;
-    food: Array<food>;
-    exercise: Array<exercise>;
+    question1: string;
+    question2: string;
+    question3: string;
+    question4: string;
+    question5: string;
 }
 
 export interface reportEntries {
