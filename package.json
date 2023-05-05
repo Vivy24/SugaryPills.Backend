@@ -4,7 +4,7 @@
   "description": "backend for the interactive for diabetes website",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && npx tsc",
+    "build": "concurrently \"npm install\" \"npx tsc\"",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
