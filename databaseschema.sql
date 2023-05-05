@@ -1,7 +1,5 @@
 CREATE TABLE identifications (
     ID SERIAL PRIMARY KEY,
-    firstName VARCHAR(50) NOT NULL,
-    lastName VARCHAR(50) NOT NULL,
     age INT NOT NULL, 
     height VARCHAR(10) NOT NULL,
     weight VARCHAR(10) NOT NULL,
