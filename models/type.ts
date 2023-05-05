@@ -4,11 +4,9 @@ export interface identification {
     age: number;
     height?: string;
     weight?: string;
-    BMI: string;
     gender: string;
     email: string;
     familyHasDiabetes: boolean;
-    isIndigenous: boolean;
 }
 
 export interface symptomResult {

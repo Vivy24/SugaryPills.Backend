@@ -12,9 +12,9 @@ exports.getID = async (id: number) => {
 }
 
 exports.createID = async (inputID: identification) => {
-    const { firstName, lastName, age, height, weight, BMI, gender, email, familyHasDiabetes, isIndigenous } = inputID;
+    const { firstName, lastName, age, height, weight, gender, email, familyHasDiabetes } = inputID;
     let resultID: number | undefined;
-    await pool.query("INSERT INTO identifications (firstName, lastName,  age, height, weight, BMI, gender, email, familyHasDiabetes, isIndigenous) VALUES ($1,$2,$3,$4, $5, $6, $7, $8, $9, $10) RETURNING id ", [firstName, lastName, age, height, weight, BMI, gender, email, familyHasDiabetes, isIndigenous]).then((res: any) => {
+    await pool.query("INSERT INTO identifications (firstName, lastName,  age, height, weight, gender, email, familyHasDiabetes) VALUES ($1,$2,$3,$4, $5, $6, $7, $8, $9) RETURNING id ", [firstName, lastName, age, height, weight, gender, email, familyHasDiabetes]).then((res: any) => {
         resultID = res.rows[0].id;
     }).catch((e: Error) => {
         throw e;
@@ -46,14 +46,14 @@ exports.createSymptomResult = async (inputSymptom: symptomResult, identification
 // Lifestyle Queries
 exports.getLifestyle = async (lifestyleID: number) => {
     let result: lifeStyleResult | undefined;
-    await pool.query("SELECT * FROM lifestyleresult where id = $1", [lifestyleID]).then((res: any) => (result = res.rows)).catch((e: Error) => {
+    await pool.query("SELECT * FROM lifestyleresults where id = $1", [lifestyleID]).then((res: any) => (result = res.rows)).catch((e: Error) => {
         throw e;
     });
     return result;
 }
 exports.createLifestyleResult = async (question1: string, question2: string, question3: string, question4: string, question5: string, identificationID: number) => {
     let resultID: number | undefined;
-    await pool.query("INSERT INTO lifestyleresult (identificationID, question1, question2, question3, question4, question5) VALUES ($1,$2,$3,$4, $5, $6) RETURNING id ", [identificationID, question1, question2, question3, question4, question5]).then((res: any) => {
+    await pool.query("INSERT INTO lifestyleresults (identificationID, question1, question2, question3, question4, question5) VALUES ($1,$2,$3,$4, $5, $6) RETURNING id ", [identificationID, question1, question2, question3, question4, question5]).then((res: any) => {
         resultID = res.rows[0].id;
     }).catch((e: Error) => {
         throw e;

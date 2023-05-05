@@ -5,11 +5,8 @@ CREATE TABLE identifications (
     age INT NOT NULL, 
     height VARCHAR(10) NOT NULL,
     weight VARCHAR(10) NOT NULL,
-    BMI VARCHAR(10),
     gender VARCHAR(10) NOT NULL,
-    email VARCHAR(320) NOT NULL,
-    familyHasDiabetes BOOLEAN NOT NULL, 
-    isIndigenous BOOLEAN NOT NULL
+    email VARCHAR(320) NOT NULL
 );
 
 CREATE TABLE symptomResults (
@@ -28,7 +25,7 @@ CREATE TABLE symptomResults (
     FOREIGN KEY (identificationID) REFERENCES identifications(id)
 );
 
-CREATE TABLE lifestyleResult (
+CREATE TABLE lifestyleResults (
     ID SERIAL PRIMARY KEY,
     identificationID int NOT NULL,
     question1 VARCHAR(320),
@@ -47,5 +44,5 @@ CREATE TABLE reportEntries (
     lifeStyleID INT,
     FOREIGN KEY (identificationID) REFERENCES identifications(id),
     FOREIGN KEY (symptomID) REFERENCES symptomResults(id),
-    FOREIGN KEY (lifeStyleID) REFERENCES lifestyleResult(id)
+    FOREIGN KEY (lifeStyleID) REFERENCES lifestyleResults(id)
 );
