@@ -30,13 +30,6 @@ export interface LifeStyleResult {
     question5: string;
 }
 
-export interface ReportEntries {
-    identification: Identification;
-    symptoms: SymptomResult;
-    lifestyles: LifeStyleResult;
-}
-
-
 // calculation model 
 export interface SurveyResult {
     totalPoint: number,

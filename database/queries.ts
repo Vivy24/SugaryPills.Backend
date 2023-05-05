@@ -1,4 +1,4 @@
-import { Identification, LifeStyleResult, ReportEntries, SymptomResult } from "../models/type";
+import { Identification, LifeStyleResult, SymptomResult } from "../models/type";
 import { pool } from './config';
 
 
@@ -126,28 +126,6 @@ export module poolQuery {
             throw e;
         });
         return result;
-    }
-
-
-    // Entries Queries
-    export const getEntries = async (id: number) => {
-        let result: ReportEntries | undefined;
-        await pool.query("SELECT * FROM reportentries where id = $1 ", [id]).then((res: any) => {
-            result = res.rows[0].id;
-        }).catch((e: Error) => {
-            throw e;
-        });
-        return result;
-    }
-
-    export const createEntries = async (identificationID: number, symptomID: number, lifestyleID: number) => {
-        let resultID: number | undefined;
-        await pool.query("INSERT INTO reportentries (identificationid, symptomid, lifestyleid) VALUES ($1,$2,$3) RETURNING id ", [identificationID, symptomID, lifestyleID]).then((res: any) => {
-            resultID = res.rows[0].id;
-        }).catch((e: Error) => {
-            throw e;
-        });
-        return resultID;
     }
 }
 // Identification Queries

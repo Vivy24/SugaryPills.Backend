@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express';
-import { LifeStyleResult, ReportEntries, SymptomResult } from '../../models/type';
+import { LifeStyleResult, SymptomResult } from '../../models/type';
 import { poolQuery } from "../../database/queries";
 import { calculateRisk } from '../../helpers/risk';
 

@@ -13,7 +13,7 @@ CREATE TABLE symptomResults (
     ID SERIAL PRIMARY KEY, 
     identificationID int NOT NULL,
     urination BOOLEAN NOT NULL,
-    thrist BOOLEAN NOT NULL,
+    thirst BOOLEAN NOT NULL,
     hunger BOOLEAN NOT NULL,
     fatigue BOOLEAN NOT NULL,
     blurred BOOLEAN NOT NULL,
@@ -34,15 +34,4 @@ CREATE TABLE lifestyleResults (
     question4 VARCHAR(320) NOT NULL,
     question5 VARCHAR(320) NOT NULL,
     FOREIGN KEY (identificationID) REFERENCES identifications(id)
-);
-
-
-CREATE TABLE reportEntries (
-    ID SERIAL PRIMARY KEY,
-    identificationID INT, 
-    symptomID INT, 
-    lifeStyleID INT,
-    FOREIGN KEY (identificationID) REFERENCES identifications(id),
-    FOREIGN KEY (symptomID) REFERENCES symptomResults(id),
-    FOREIGN KEY (lifeStyleID) REFERENCES lifestyleResults(id)
 );
