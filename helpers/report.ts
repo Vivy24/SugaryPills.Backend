@@ -1,24 +1,5 @@
 import { poolQuery } from "../database/queries";
-// report prototypes
-export interface ReportResult {
-    urination: FieldStats,
-    thirst: FieldStats,
-    hunger: FieldStats,
-    fatigue: FieldStats,
-    blurredVision: FieldStats,
-    weakHealing: FieldStats,
-    tingling: FieldStats,
-    dryIthcySkin: FieldStats,
-    weightLoss: FieldStats,
-    count: number,
-    totalCount: number
-}
-
-export interface FieldStats {
-    count: number,
-    percentage: number,
-}
-
+import { FieldStats } from "../models/type";
 
 export const calculateReport = async (filterIDs: Array<{ identificationid: number }>) => {
     let result = {
