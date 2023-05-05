@@ -38,7 +38,7 @@ export interface ReportEntries {
 
 
 // calculation model 
-export interface surveyResult {
+export interface SurveyResult {
     totalPoint: number,
     risk: string
 }
