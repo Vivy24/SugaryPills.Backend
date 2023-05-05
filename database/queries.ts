@@ -33,15 +33,37 @@ export module poolQuery {
     }
 
     export const createSymptomResult = async (inputSymptom: SymptomResult, identificationID: number) => {
-        const { urination, thrist, hunger, fatigue, blurred, slowhealing, tingling, dry, weightChange, moodChange } = inputSymptom;
+        const { urination, thirst, hunger, fatigue, blurredVision, weakHealing, tingling, dryIthcySkin, weightChange, moodChange } = inputSymptom;
 
-        await pool.query("INSERT INTO symptomresults (identificationID, urination, thrist, hunger, fatigue, blurred, slowhealing, tingling, dry, weightChange, moodChange) VALUES ($1,$2,$3,$4, $5, $6, $7, $8, $9, $10, $11) RETURNING id ", [identificationID, urination, thrist, hunger, fatigue, blurred, slowhealing, tingling, dry, weightChange, moodChange]).then((res: any) => {
+        await pool.query("INSERT INTO symptomresults (identificationID, urination, thirst, hunger, fatigue, blurredVision, weakHealing, tingling, dryIthcySkin, weightChange, moodChange) VALUES ($1,$2,$3,$4, $5, $6, $7, $8, $9, $10, $11) RETURNING id ", [identificationID, urination, thirst, hunger, fatigue, blurredVision, weakHealing, tingling, dryIthcySkin, weightChange, moodChange]).then((res: any) => {
             res = res.rows[0].id;
         }).catch((e: Error) => {
             throw e;
         });
     };
 
+    export const getTotalSymptomAllPeople = async (symptom: string) => {
+        let result: number | undefined;
+        let query = `SELECT count(CASE WHEN ${symptom} IS TRUE THEN 1 END) FROM symptomresults`
+        // await pool.query("SELECT count(*) filter (where $1 is TRUE) from symptomresults", [symptom]).then((res: any) => (result = res.rows[0])).catch((e: Error) => {
+        //     throw e;
+        // })
+
+        await pool.query(query).then((res: any) => (result = res.rows[0].count)).catch((e: Error) => {
+            throw e;
+        });
+        return result;
+    }
+
+    export const getTotalSymptomFilteredPeople = async (symptom: string, identificationID: number) => {
+        let result: number | undefined;
+        let query = `SELECT count(CASE WHEN ${symptom} IS TRUE THEN 1 END) FROM symptomresults WHERE identificationid = ${identificationID}`
+        await pool.query(query).then((res: any) => (result = res.rows[0].count)).catch((e: Error) => {
+            throw e;
+        });
+
+        return result as number;
+    }
 
     // Lifestyle Queries
     export const getLifestyle = async (lifestyleID: number) => {
@@ -63,34 +85,41 @@ export module poolQuery {
     };
 
 
-    export const getArrayOfIDFromLifestyle = async (filter1: Array<string>, filter2: string, filter3: string, filter4: Array<string>, filter5: Array<string>) => {
-        let result: Array<number> | undefined;
+    export const getArrayOfIDFromLifestyle = async (filterRequest: LifeStyleResult) => {
+        let result: Array<{ identificationid: number }> | undefined;
 
         let query = 'SELECT identificationid FROM lifestyleresults WHERE';
-        if (filter1) {
-            for (const filter of filter1) {
-                query += `LOWER(question1) LIKE '%${filter}$%' AND`;
+        if (filterRequest.question1) {
+            for (const filter of filterRequest.question1.split(",")) {
+                query += ` LOWER(question1) LIKE '%${filter}%' AND`;
             }
         }
 
-        if (filter2) {
-            query += `LOWER(question2) LIKE '%${filter2}$%' AND`;
+        if (filterRequest.question2) {
+            query += ` LOWER(question2) LIKE '%${filterRequest.question2}%' AND`;
         }
 
-        if (filter3) {
-            query += `LOWER(question3) LIKE '%${filter3}$%' AND`;
+        if (filterRequest.question3) {
+            query += ` LOWER(question3) LIKE '%${filterRequest.question3}%' AND`;
         }
 
-        if (filter4) {
-            for (const filter of filter4) {
-                query += `LOWER(question4) LIKE '%${filter}$%' AND`;
+        if (filterRequest.question4) {
+            for (const filter of filterRequest.question4.split(",")) {
+                query += ` LOWER(question4) LIKE '%${filter}%' AND`;
             }
         }
 
-        if (filter5) {
-            for (const filter of filter5) {
-                query += `LOWER(question5) LIKE '%${filter}$%' AND`;
+        if (filterRequest.question5) {
+            for (const filter of filterRequest.question5.split(",")) {
+                query += ` LOWER(question5) LIKE '%${filter}%' AND`;
             }
+        }
+        if (query.includes("AND")) {
+            query = query.substring(0, query.length - 3);
+        }
+        else {
+            query = query.substring(0, query.length - 5);
+
         }
 
         await pool.query(query).then((res: any) => (result = res.rows)).catch((e: Error) => {

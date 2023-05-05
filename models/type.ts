@@ -11,13 +11,13 @@ export interface Identification {
 
 export interface SymptomResult {
     urination: boolean;
-    thrist: boolean;
+    thirst: boolean;
     hunger: boolean;
     fatigue: boolean;
-    blurred: boolean;
-    slowhealing: boolean;
+    blurredVision: boolean;
+    weakHealing: boolean;
     tingling: boolean;
-    dry: boolean;
+    dryIthcySkin: boolean;
     weightChange: boolean;
     moodChange: boolean;
 }
@@ -55,6 +55,7 @@ export interface ReportResult {
     tingling: FieldStats,
     dryIthcySkin: FieldStats,
     weightLoss: FieldStats,
+    moodChanges: FieldStats;
     count: number,
     totalCount: number
 }
