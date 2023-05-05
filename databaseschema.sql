@@ -6,14 +6,16 @@ CREATE TABLE identifications (
     height VARCHAR(10) NOT NULL,
     weight VARCHAR(10) NOT NULL,
     gender VARCHAR(10) NOT NULL,
-    email VARCHAR(320) NOT NULL
+    email VARCHAR(320) NOT NULL,
+    familyHasDiabetes BOOLEAN NOT NULL, 
+    isPregnant BOOLEAN NOT NULL
 );
 
 CREATE TABLE symptomResults (
     ID SERIAL PRIMARY KEY, 
     identificationID int NOT NULL,
     urination BOOLEAN NOT NULL,
-    thirst BOOLEAN NOT NULL,
+    thrist BOOLEAN NOT NULL,
     hunger BOOLEAN NOT NULL,
     fatigue BOOLEAN NOT NULL,
     blurred BOOLEAN NOT NULL,

@@ -7,12 +7,13 @@ const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD
 
 const proConfig = process.env.DATABASE_URL
 
-const pool = new Pool({
+export const pool = new Pool({
     connectionString:
         process.env.NODE_ENV == "production" ? proConfig : devConfig,
-    ssl: {
-        rejectUnauthorized: process.env.NODE_ENV == "production" ? false : true,
-    },
+    ssl: false
+    // ssl: {
+    //     rejectUnauthorized: process.env.NODE_ENV == "production" ? false : true,
+    // },
 })
 
 exports.default = pool
