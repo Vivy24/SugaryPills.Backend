@@ -1,11 +1,58 @@
-import { Identification, LifeStyleResult, SymptomResult } from "../models/type";
+import { Identification, LifeStyleResult, SurveyAnswer, SymptomResult } from "../models/type";
 import { pool } from './config';
 
 
 export module poolQuery {
-    export const getID = async (id: number) => {
-        let result: Identification | undefined;
-        await pool.query("SELECT * FROM identifications where ID = $1", [id]).then((res: any) => (result = res.rows)).catch((e: Error) => {
+    export const getSurveyById = async (id: number) => {
+        let result: SurveyAnswer | undefined;
+        await pool.query("SELECT * FROM identifications JOIN symptomresults ON symptomresults.identificationid = identifications.id JOIN lifestyleresults ON lifestyleresults.identificationid = identifications.id WHERE identifications.id = $1", [id]).then((res: any) => {
+            const data = res.rows[0];
+            result = {
+                identification: {
+                    gender: data.gender,
+                    age: data.age,
+                    height: data.height,
+                    weight: data.weight,
+                    email: data.email,
+                    familyHasDiabetes: data.familyhasdiabetes,
+                    isPregnant: data.ispregnant
+                },
+                symptoms: {
+                    urination: data.urination,
+                    thirst: data.thirst,
+                    hunger: data.hunger,
+                    fatigue: data.fatigue,
+                    blurred: data.blurredvision,
+                    slowhealing: data.weakhealing,
+                    tingling: data.tingling,
+                    dry: data.dryithcyskin,
+                    weightChange: data.weightchange,
+                    moodChanges: data.moodchange
+                },
+                lifestyle: {
+                    question1: {
+                        bread: data.question1.includes('bread'),
+                        sugar: data.question1.includes('sugar'),
+                        salt: data.question1.includes('salt'),
+                        flour: data.question1.includes('flour')
+                    },
+                    question2: data.question2,
+                    question3: data.question3,
+                    question4: {
+                        airPollution: data.question4.includes('air pollution'),
+                        waterPollution: data.question4.includes('lack of clean drinking water'),
+                        toxins: data.question4.includes("exposure to toxins")
+                    },
+                    question5: {
+                        trauma: data.question5.includes("historical trauma"),
+                        finances: data.question5.includes("financial issue"),
+                        other: data.question5.includes("other reasons")
+                    }
+                }
+            }
+
+
+        }).catch((e: Error) => {
             throw e;
         });
         return result;
@@ -127,5 +174,61 @@ export module poolQuery {
         });
         return result;
     }
+
+    export const getAllSurvey = async () => {
+        let result: Array<SurveyAnswer> = [];
+        await pool.query("SELECT * FROM identifications JOIN symptomresults ON symptomresults.identificationid = identifications.id JOIN lifestyleresults ON lifestyleresults.identificationid = identifications.id").
+            then((res: any) => {
+                for (const rows of res.rows) {
+                    const formattedSurveyAnswer: SurveyAnswer = {
+                        identification: {
+                            gender: rows.gender,
+                            age: rows.age,
+                            height: rows.height,
+                            weight: rows.weight,
+                            email: rows.email,
+                            familyHasDiabetes: rows.familyhasdiabetes,
+                            isPregnant: rows.ispregnant
+                        },
+                        symptoms: {
+                            urination: rows.urination,
+                            thirst: rows.thirst,
+                            hunger: rows.hunger,
+                            fatigue: rows.fatigue,
+                            blurred: rows.blurredvision,
+                            slowhealing: rows.weakhealing,
+                            tingling: rows.tingling,
+                            dry: rows.dryithcyskin,
+                            weightChange: rows.weightchange,
+                            moodChanges: rows.moodchange
+                        },
+                        lifestyle: {
+                            question1: {
+                                bread: rows.question1.includes('bread'),
+                                sugar: rows.question1.includes('sugar'),
+                                salt: rows.question1.includes('salt'),
+                                flour: rows.question1.includes('flour')
+                            },
+                            question2: rows.question2,
+                            question3: rows.question3,
+                            question4: {
+                                airPollution: rows.question4.includes('air pollution'),
+                                waterPollution: rows.question4.includes('lack of clean drinking water'),
+                                toxins: rows.question4.includes("exposure to toxins")
+                            },
+                            question5: {
+                                trauma: rows.question5.includes("historical trauma"),
+                                finances: rows.question5.includes("financial issue"),
+                                other: rows.question5.includes("other reasons")
+                            }
+                        }
+                    }
+                    result.push(formattedSurveyAnswer);
+                    // console.log(rows);
+                }
+            }).catch((e: Error) => {
+                throw e;
+            });
+        return result;
+    }
 }
-// Identification Queries
