@@ -33,7 +33,8 @@ export interface LifeStyleResult {
 // calculation model 
 export interface SurveyResult {
     totalPoint: number,
-    risk: string
+    risk: string,
+    hasMoreThan3Symptoms: boolean,
 }
 
 

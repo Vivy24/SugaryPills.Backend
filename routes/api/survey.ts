@@ -46,7 +46,7 @@ router.post("/", async (req: Request, res: Response) => {
         const formattedLifestyle = mapLifeStyleResult(req.body.lifestyle);
 
         await poolQuery.createLifestyleResult(formattedLifestyle, ID as number);
-        const surveyResult = calculateRisk(formattedLifestyle);
+        const surveyResult = calculateRisk(formattedLifestyle, formattedSymtom);
 
         const inputSurveyAnswer = await poolQuery.getSurveyById(ID as number);
         res.status(200).json(

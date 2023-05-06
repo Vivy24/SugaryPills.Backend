@@ -1,11 +1,12 @@
 // question1: Array<string>, question2: string, question3: string, question4: Array<string>, question5: Array<string>
 
-import { LifeStyleResult, SurveyResult } from "../models/type";
+import { LifeStyleResult, SurveyResult, SymptomResult } from "../models/type";
 
-export const calculateRisk = function (lifestyleInput: LifeStyleResult) {
+export const calculateRisk = function (lifestyleInput: LifeStyleResult, symptomResult: SymptomResult) {
     let result: SurveyResult = {
         totalPoint: 0,
-        risk: 'unknown'
+        risk: 'unknown',
+        hasMoreThan3Symptoms: false,
     }
     let total = 0;
     const question1 = lifestyleInput.question1.split(",");
@@ -48,5 +49,11 @@ export const calculateRisk = function (lifestyleInput: LifeStyleResult) {
         result.risk = 'high';
 
     }
+
+    let countTrueSymptoms = 0;
+    countTrueSymptoms = Object.values(symptomResult).filter(symptom => symptom === true).length;
+
+    result.hasMoreThan3Symptoms = countTrueSymptoms > 2 ? true : false;
+
     return result;
 }

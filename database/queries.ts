@@ -92,9 +92,6 @@ export module poolQuery {
     export const getTotalSymptomAllPeople = async (symptom: string) => {
         let result: number | undefined;
         let query = `SELECT count(CASE WHEN ${symptom} IS TRUE THEN 1 END) FROM symptomresults`
-        // await pool.query("SELECT count(*) filter (where $1 is TRUE) from symptomresults", [symptom]).then((res: any) => (result = res.rows[0])).catch((e: Error) => {
-        //     throw e;
-        // })
 
         await pool.query(query).then((res: any) => (result = res.rows[0].count)).catch((e: Error) => {
             throw e;
