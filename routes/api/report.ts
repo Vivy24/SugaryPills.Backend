@@ -67,16 +67,14 @@ router.post("/", async (req: Request, res: Response) => {
       filterRequest.lifestyles.question4 == "" &&
       filterRequest.lifestyles.question5 == ""
     ) {
-      console.log("Calculate empty report");
       result = await calculateEmptyReport();
-    }
-
-    if (filterIDs && filterIDs.length > 0) {
-      result = await calculateReport(filterIDs);
     } else {
-      result = await calculateEmptyReport();
+      if (filterIDs && filterIDs.length > 0) {
+        result = await calculateReport(filterIDs);
+      } else {
+        result = await calculateEmptyReport();
+      }
     }
-
     res.status(200).json(result);
   } catch (error: any) {
     console.error(error);
