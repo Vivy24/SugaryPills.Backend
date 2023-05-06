@@ -71,6 +71,10 @@ router.post("/", async (req: Request, res: Response) => {
     } else {
       if (filterIDs && filterIDs.length > 0) {
         result = await calculateReport(filterIDs);
+      } else {
+        result.totalCount = Number(
+          await poolQuery.getTotalRecordsInSymptomResults()
+        );
       }
     }
     res.status(200).json(result);
