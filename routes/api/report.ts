@@ -66,75 +66,88 @@ router.post("/", async (req: Request, res: Response) => {
       const totalRecords = Number(
         await poolQuery.getTotalRecordsInSymptomResults()
       );
+
+      console.log(totalRecords);
       const urinationTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("urination")
       );
       result.urination.count = urinationTrueRecords;
-      result.urination.percentage = result.urination.count / totalRecords;
+      result.urination.percentage = Number(
+        result.urination.count / totalRecords
+      );
       result.count += urinationTrueRecords;
 
       const thirstTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("thirst")
       );
       result.thirst.count = thirstTrueRecords;
-      result.thirst.percentage = result.thirst.count / totalRecords;
+      result.thirst.percentage = Number(result.thirst.count / totalRecords);
       result.count += thirstTrueRecords;
 
       const hungerTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("hunger")
       );
       result.hunger.count = hungerTrueRecords;
-      result.hunger.percentage = result.hunger.count / totalRecords;
+      result.hunger.percentage = Number(result.hunger.count / totalRecords);
       result.count += hungerTrueRecords;
 
       const fatigueTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("fatigue")
       );
       result.fatigue.count = fatigueTrueRecords;
-      result.fatigue.percentage = result.fatigue.count / totalRecords;
+      result.fatigue.percentage = Number(result.fatigue.count / totalRecords);
       result.count += fatigueTrueRecords;
 
       const blurredVisionTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("blurredVision")
       );
       result.blurredVision.count = blurredVisionTrueRecords;
-      result.blurredVision.percentage =
-        result.blurredVision.count / totalRecords;
+      result.blurredVision.percentage = Number(
+        result.blurredVision.count / totalRecords
+      );
       result.count += blurredVisionTrueRecords;
 
       const weakHealingTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("weakHealing")
       );
       result.weakHealing.count = weakHealingTrueRecords;
-      result.weakHealing.percentage = result.weakHealing.count / totalRecords;
+      result.weakHealing.percentage = Number(
+        result.weakHealing.count / totalRecords
+      );
       result.count += weakHealingTrueRecords;
 
       const tinglingTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("tingling")
       );
       result.tingling.count = tinglingTrueRecords;
-      result.tingling.percentage = result.tingling.count / totalRecords;
+      result.tingling.percentage = Number(result.tingling.count / totalRecords);
       result.count += tinglingTrueRecords;
 
       const dryIthcySkinTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("dryIthcySkin")
       );
       result.dryIthcySkin.count = dryIthcySkinTrueRecords;
-      result.dryIthcySkin.percentage = result.dryIthcySkin.count / totalRecords;
+      result.dryIthcySkin.percentage = Number(
+        result.dryIthcySkin.count / totalRecords
+      );
       result.count += dryIthcySkinTrueRecords;
 
       const weightChangeTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("weightChange")
       );
       result.weightLoss.count = weightChangeTrueRecords;
-      result.weightLoss.percentage = result.weightLoss.count / totalRecords;
+      result.weightLoss.percentage = Number(
+        result.weightLoss.count / totalRecords
+      );
       result.count += weightChangeTrueRecords;
 
       const moodChangeTrueRecords = Number(
         await poolQuery.getTotalSymptomAllPeople("moodChange")
       );
       result.moodChanges.count = moodChangeTrueRecords;
-      result.moodChanges.percentage = result.moodChanges.count / totalRecords;
+      result.moodChanges.percentage = Number(
+        result.moodChanges.count / totalRecords
+      );
       result.count += moodChangeTrueRecords;
       result.totalCount = totalRecords * 10;
     }
