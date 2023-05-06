@@ -60,14 +60,12 @@ router.post("/", async (req: Request, res: Response) => {
       count: 0,
       totalCount: 0,
     };
-    console.log(filterRequest.lifestyles);
-    console.log(filterRequest.lifestyles.question1.length);
     if (
-      filterRequest.lifestyles.question1.length == 0 &&
-      !filterRequest.lifestyles.question2 &&
-      !filterRequest.lifestyles.question3 &&
-      filterRequest.lifestyles.question4.length == 0 &&
-      filterRequest.lifestyles.question5.length == 0
+      filterRequest.lifestyles.question1 == "" &&
+      filterRequest.lifestyles.question2 == "" &&
+      filterRequest.lifestyles.question3 == "" &&
+      filterRequest.lifestyles.question4 == "" &&
+      filterRequest.lifestyles.question5 == ""
     ) {
       result = await calculateEmptyReport();
     }
