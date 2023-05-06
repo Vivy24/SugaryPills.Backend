@@ -60,6 +60,18 @@ router.post("/", async (req: Request, res: Response) => {
         if (filterIDs && filterIDs.length > 0) {
             result = await calculateReport(filterIDs);
         }
+        else {
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('urination'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('thirst'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('hunger'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('fatigue'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('blurredVision'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('weakHealing'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('tingling'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('dryIthcySkin'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('weightChange'));
+            result.totalCount += Number(await poolQuery.getTotalSymptomAllPeople('moodChange'));
+        }
         res.status(200).json(result);
 
     }
