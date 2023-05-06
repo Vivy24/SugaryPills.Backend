@@ -181,53 +181,38 @@ export const calculateReport = async (
 
   const urinationObj = await calculateFieldStat("urination", filterIDs);
   result.urination = urinationObj.symptomResult;
-  result.totalCount += +urinationObj.totalCount;
-  result.count += +result.urination.count;
 
   const thirstObj = await calculateFieldStat("thirst", filterIDs);
   result.thirst = thirstObj.symptomResult;
-  result.totalCount += +thirstObj.totalCount;
-  result.count += +result.thirst.count;
 
   const hungerObj = await calculateFieldStat("hunger", filterIDs);
   result.hunger = hungerObj.symptomResult;
-  result.totalCount += +hungerObj.totalCount;
-  result.count += +result.hunger.count;
 
   const fatigueObj = await calculateFieldStat("fatigue", filterIDs);
   result.fatigue = fatigueObj.symptomResult;
-  result.totalCount += +fatigueObj.totalCount;
-  result.count += +result.fatigue.count;
 
   const blurObj = await calculateFieldStat("blurredVision", filterIDs);
   result.blurredVision = blurObj.symptomResult;
-  result.totalCount += +blurObj.totalCount;
-  result.count += +result.blurredVision.count;
 
   const weakObj = await calculateFieldStat("weakHealing", filterIDs);
   result.weakHealing = weakObj.symptomResult;
-  result.totalCount += +weakObj.totalCount;
-  result.count += +result.weakHealing.count;
 
   const tinglingObj = await calculateFieldStat("tingling", filterIDs);
   result.tingling = tinglingObj.symptomResult;
-  result.totalCount += +tinglingObj.totalCount;
-  result.count += +result.tingling.count;
 
   const dryIthcySkinObj = await calculateFieldStat("dryIthcySkin", filterIDs);
   result.dryIthcySkin = dryIthcySkinObj.symptomResult;
-  result.totalCount += +dryIthcySkinObj.totalCount;
-  result.count += +result.dryIthcySkin.count;
 
   const weightChangeObj = await calculateFieldStat("weightChange", filterIDs);
   result.weightLoss = weightChangeObj.symptomResult;
-  result.totalCount += +weightChangeObj.totalCount;
-  result.count += +result.weightLoss.count;
 
   const moodChangeObj = await calculateFieldStat("moodChange", filterIDs);
   result.moodChanges = moodChangeObj.symptomResult;
-  result.totalCount += +moodChangeObj.totalCount;
-  result.count += +result.moodChanges.count;
+
+  result.totalCount = await Number(
+    await poolQuery.getTotalRecordsInSymptomResults()
+  );
+  result.count = filterIDs.length;
 
   return result;
 };
