@@ -7,7 +7,7 @@ const router = express.Router();
 // @route GET /api/report
 // @desc Generate the report based on the filter
 // @access public
-router.get("/", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
     try {
         const filterRequest: LifeStyleResult = req.body.lifestyles;
         const filterIDs = await poolQuery.getArrayOfIDFromLifestyle(filterRequest);
