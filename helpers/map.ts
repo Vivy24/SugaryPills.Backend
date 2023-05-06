@@ -142,6 +142,5 @@ export const mapReportLifestyle = (inputReportLifeStyle: any) => {
         }
     }
 
-    console.log(result);
     return result;
 }

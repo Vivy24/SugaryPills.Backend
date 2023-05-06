@@ -13,11 +13,53 @@ router.post("/", async (req: Request, res: Response) => {
     try {
         const filterRequest = await mapReportLifestyle(req.body);
         const filterIDs = await poolQuery.getArrayOfIDFromLifestyle(filterRequest.lifestyles as LifeStyleResult);
-        let result = {};
+        let result = {
+            urination: {
+                count: 0,
+                percentage: 0,
+            },
+            thirst: {
+                count: 0,
+                percentage: 0,
+            },
+            hunger: {
+                count: 0,
+                percentage: 0,
+            },
+            fatigue: {
+                count: 0,
+                percentage: 0,
+            },
+            blurredVision: {
+                count: 0,
+                percentage: 0,
+            },
+            weakHealing: {
+                count: 0,
+                percentage: 0,
+            },
+            tingling: {
+                count: 0,
+                percentage: 0,
+            },
+            dryIthcySkin: {
+                count: 0,
+                percentage: 0,
+            },
+            weightLoss: {
+                count: 0,
+                percentage: 0,
+            },
+            moodChanges: {
+                count: 0,
+                percentage: 0,
+            },
+            count: 0,
+            totalCount: 0
+        }
         if (filterIDs && filterIDs.length > 0) {
             result = await calculateReport(filterIDs);
         }
-
         res.status(200).json(result);
 
     }
