@@ -63,10 +63,8 @@ router.post("/", async (req: Request, res: Response) => {
     console.log(filterIDs);
     if (filterIDs && filterIDs.length > 0) {
       result = await calculateReport(filterIDs);
-    } 
-
-else {
-    const totalRecords = Number(
+    } else {
+      const totalRecords = Number(
         await poolQuery.getTotalRecordsInSymptomResults()
       );
 
@@ -153,8 +151,6 @@ else {
       );
       result.count += moodChangeTrueRecords;
       result.totalCount = totalRecords * 10;
-}
-    
     }
     res.status(200).json(result);
   } catch (error: any) {
