@@ -60,6 +60,8 @@ router.post("/", async (req: Request, res: Response) => {
       count: 0,
       totalCount: 0,
     };
+    console.log(filterRequest.lifestyles);
+    console.log(filterRequest.lifestyles.question1.length);
     if (
       filterRequest.lifestyles.question1.length == 0 &&
       !filterRequest.lifestyles.question2 &&
