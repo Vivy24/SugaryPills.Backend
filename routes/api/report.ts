@@ -67,6 +67,7 @@ router.post("/", async (req: Request, res: Response) => {
       filterRequest.lifestyles.question4 == "" &&
       filterRequest.lifestyles.question5 == ""
     ) {
+      console.log("Calculate empty report");
       result = await calculateEmptyReport();
     }
 

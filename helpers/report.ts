@@ -54,28 +54,24 @@ export const calculateEmptyReport = async () => {
   );
   result.urination.count = urinationTrueRecords;
   result.urination.percentage = Number(result.urination.count / totalRecords);
-  result.count += urinationTrueRecords;
 
   const thirstTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("thirst")
   );
   result.thirst.count = thirstTrueRecords;
   result.thirst.percentage = Number(result.thirst.count / totalRecords);
-  result.count += thirstTrueRecords;
 
   const hungerTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("hunger")
   );
   result.hunger.count = hungerTrueRecords;
   result.hunger.percentage = Number(result.hunger.count / totalRecords);
-  result.count += hungerTrueRecords;
 
   const fatigueTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("fatigue")
   );
   result.fatigue.count = fatigueTrueRecords;
   result.fatigue.percentage = Number(result.fatigue.count / totalRecords);
-  result.count += fatigueTrueRecords;
 
   const blurredVisionTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("blurredVision")
@@ -84,7 +80,6 @@ export const calculateEmptyReport = async () => {
   result.blurredVision.percentage = Number(
     result.blurredVision.count / totalRecords
   );
-  result.count += blurredVisionTrueRecords;
 
   const weakHealingTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("weakHealing")
@@ -93,14 +88,12 @@ export const calculateEmptyReport = async () => {
   result.weakHealing.percentage = Number(
     result.weakHealing.count / totalRecords
   );
-  result.count += weakHealingTrueRecords;
 
   const tinglingTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("tingling")
   );
   result.tingling.count = tinglingTrueRecords;
   result.tingling.percentage = Number(result.tingling.count / totalRecords);
-  result.count += tinglingTrueRecords;
 
   const dryIthcySkinTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("dryIthcySkin")
@@ -109,14 +102,12 @@ export const calculateEmptyReport = async () => {
   result.dryIthcySkin.percentage = Number(
     result.dryIthcySkin.count / totalRecords
   );
-  result.count += dryIthcySkinTrueRecords;
 
   const weightChangeTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("weightChange")
   );
   result.weightLoss.count = weightChangeTrueRecords;
   result.weightLoss.percentage = Number(result.weightLoss.count / totalRecords);
-  result.count += weightChangeTrueRecords;
 
   const moodChangeTrueRecords = Number(
     await poolQuery.getTotalSymptomAllPeople("moodChange")
@@ -125,8 +116,8 @@ export const calculateEmptyReport = async () => {
   result.moodChanges.percentage = Number(
     result.moodChanges.count / totalRecords
   );
-  result.count += moodChangeTrueRecords;
-  result.totalCount = totalRecords * 10;
+  result.count = totalRecords;
+  result.totalCount = totalRecords;
 
   return result;
 };
