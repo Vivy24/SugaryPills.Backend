@@ -305,12 +305,12 @@ export module poolQuery {
               thirst: rows.thirst,
               hunger: rows.hunger,
               fatigue: rows.fatigue,
-              blurred: rows.blurredvision,
-              slowhealing: rows.weakhealing,
+              blurred: rows.blurred,
+              slowhealing: rows.slowhealing,
               tingling: rows.tingling,
-              dry: rows.dryithcyskin,
-              weightChange: rows.weightchange,
-              moodChanges: rows.moodchange,
+              dry: rows.dry,
+              weightChange: rows.weightChange,
+              moodChanges: rows.moodChanges,
             },
             lifestyle: {
               question1: {

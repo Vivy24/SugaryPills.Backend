@@ -74,7 +74,7 @@ export const calculateEmptyReport = async () => {
   result.fatigue.percentage = Number(result.fatigue.count / totalRecords);
 
   const blurredVisionTrueRecords = Number(
-    await poolQuery.getTotalSymptomAllPeople("blurredVision")
+    await poolQuery.getTotalSymptomAllPeople("blurred")
   );
   result.blurredVision.count = blurredVisionTrueRecords;
   result.blurredVision.percentage = Number(
@@ -82,7 +82,7 @@ export const calculateEmptyReport = async () => {
   );
 
   const weakHealingTrueRecords = Number(
-    await poolQuery.getTotalSymptomAllPeople("weakHealing")
+    await poolQuery.getTotalSymptomAllPeople("slowhealing")
   );
   result.weakHealing.count = weakHealingTrueRecords;
   result.weakHealing.percentage = Number(
@@ -96,7 +96,7 @@ export const calculateEmptyReport = async () => {
   result.tingling.percentage = Number(result.tingling.count / totalRecords);
 
   const dryIthcySkinTrueRecords = Number(
-    await poolQuery.getTotalSymptomAllPeople("dryIthcySkin")
+    await poolQuery.getTotalSymptomAllPeople("dry")
   );
   result.dryIthcySkin.count = dryIthcySkinTrueRecords;
   result.dryIthcySkin.percentage = Number(
