@@ -140,7 +140,7 @@ export module poolQuery {
 
     await pool
       .query(
-        "INSERT INTO symptomresults (identificationID, urination, thirst, hunger, fatigue, blurredVision, weakHealing, tingling, dryIthcySkin, weightChange, moodChange) VALUES ($1,$2,$3,$4, $5, $6, $7, $8, $9, $10, $11) RETURNING id ",
+        "INSERT INTO symptomresults (identificationID, urination, thirst, hunger, fatigue, blurred , slowhealing , tingling, dry , weightChange, moodChange) VALUES ($1,$2,$3,$4, $5, $6, $7, $8, $9, $10, $11) RETURNING id ",
         [
           identificationID,
           urination,
