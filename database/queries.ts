@@ -31,12 +31,12 @@ export module poolQuery {
             thirst: data.thirst,
             hunger: data.hunger,
             fatigue: data.fatigue,
-            blurred: data.blurredvision,
-            slowhealing: data.weakhealing,
+            blurred: data.blurred,
+            slowhealing: data.slowhealing,
             tingling: data.tingling,
-            dry: data.dryithcyskin,
-            weightChange: data.weightchange,
-            moodChanges: data.moodchange,
+            dry: data.dry,
+            weightChange: data.weightChange,
+            moodChanges: data.moodChange,
           },
           lifestyle: {
             question1: {
