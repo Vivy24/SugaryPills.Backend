@@ -182,16 +182,16 @@ export const calculateReport = async (
   const fatigueObj = await calculateFieldStat("fatigue", filterIDs);
   result.fatigue = fatigueObj.symptomResult;
 
-  const blurObj = await calculateFieldStat("blurredVision", filterIDs);
+  const blurObj = await calculateFieldStat("blurred", filterIDs);
   result.blurredVision = blurObj.symptomResult;
 
-  const weakObj = await calculateFieldStat("weakHealing", filterIDs);
+  const weakObj = await calculateFieldStat("slowhealing", filterIDs);
   result.weakHealing = weakObj.symptomResult;
 
   const tinglingObj = await calculateFieldStat("tingling", filterIDs);
   result.tingling = tinglingObj.symptomResult;
 
-  const dryIthcySkinObj = await calculateFieldStat("dryIthcySkin", filterIDs);
+  const dryIthcySkinObj = await calculateFieldStat("dry", filterIDs);
   result.dryIthcySkin = dryIthcySkinObj.symptomResult;
 
   const weightChangeObj = await calculateFieldStat("weightChange", filterIDs);
